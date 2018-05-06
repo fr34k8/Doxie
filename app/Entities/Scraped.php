@@ -26,4 +26,14 @@ class Scraped extends Model
         'uri',
     ];
     
+    /**
+     * Get the person.
+     *
+     * @return App\Entities\Person
+     */
+    public function person()
+    {
+        return $this->belongsTo('App\Entities\Person');
+    }
+    
 }

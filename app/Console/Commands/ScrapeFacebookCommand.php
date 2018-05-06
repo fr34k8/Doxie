@@ -116,11 +116,14 @@ class ScrapeFacebookCommand extends Command
                             $contents = file_get_contents($image);
                             Storage::put("profile/{$created->id}/{$key}.jpg", $contents);
                         }
+
+                        $created->scraped()->save(new $this->scraped(['uri' => $profile_uri]));
+                    } else {
+                        $this->scraped(['uri' => $profile_uri]);
                     }
                 }
 
                 // Save the scraped uri so we don't run it again
-                $this->scraped->create(['uri' => $profile_uri]);
             }
         }
     }

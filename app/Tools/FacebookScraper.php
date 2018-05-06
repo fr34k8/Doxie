@@ -40,28 +40,6 @@ class FacebookScraper
     public $profile_uri = "https://www.facebook.com/profile.php?id=";
 
     /**
-     * FacebookScraper constructor.
-     *
-     * @param \Goutte\Client $client
-     */
-    public function __construct()
-    {
-        if(!$this->crawler){
-
-            $client = new \Goutte\Client();
-
-            $guzzleClient = new \GuzzleHttp\Client(array(
-                'timeout' => 90,
-                'verify' => false,
-            ));
-    
-            $this->crawler = $client->setClient($guzzleClient);
-        }
-
-        return $this->crawler;
-    }   
-
-    /**
      * Return the instance of the facebook page
      *
      * @param string $uri
@@ -69,7 +47,15 @@ class FacebookScraper
      */
     public function getProfile(string $uri)
     {
-        $this->page = $this->crawler->request('GET', $uri);
+        $goutteClient = new Client();
+        $guzzleClient = new \GuzzleHttp\Client(array(
+            'timeout' => 60,
+            'verify' => false,
+        ));
+
+        $goutteClient->setClient($guzzleClient);
+
+        $this->page = $goutteClient->request('GET', $uri);
 
         return $this;
     }
@@ -81,6 +67,8 @@ class FacebookScraper
      */
     public function getName()
     {
+        dump('scraping name');
+        
         return $this->page->filter($this->selectors['name'])->each(function ($node) {
             return $node->text();
         });
@@ -93,6 +81,8 @@ class FacebookScraper
      */
     public function getProfileImage()
     {
+        dump('scraping profile image');
+        
         return $this->page->filter($this->selectors['profileImage'])->each(function ($node) {
            return $node->attr('src');
         });
@@ -105,6 +95,8 @@ class FacebookScraper
      */
     public function getWork()
     {
+        dump('scraping work');
+        
         return $this->page->filter($this->selectors['work'])->each(function ($node) {
             return $node->text();
         });
@@ -117,6 +109,8 @@ class FacebookScraper
      */
     public function getEducation()
     {
+        dump('scraping education');
+        
         return $this->page->filter($this->selectors['education'])->each(function ($node) {
             return $node->text();
         });
@@ -129,8 +123,11 @@ class FacebookScraper
      */
     public function getLocation()
     {
+        dump('scraping location');
+
         return $this->page->filter($this->selectors['location'])->each(function ($node) {
-            return $node->text();
+            $replace = ["Current city", "Home Town"];
+            return str_replace($replace, "", $node->text());
         });
     }
 
@@ -141,6 +138,8 @@ class FacebookScraper
      */
     public function getImages()
     {
+        dump('scraping images');
+        
         return $this->page->filter($this->selectors['images'])->each(function ($node) {
             return $node->attr('src');
         });

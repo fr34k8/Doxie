@@ -16,6 +16,7 @@ class CreateScrapedTable extends Migration
         Schema::create('scraped', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uri');
+            $table->integer('person_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

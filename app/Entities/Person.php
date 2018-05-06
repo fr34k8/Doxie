@@ -34,4 +34,14 @@ class Person extends Model
         'location'  => 'array',
     ];
     
+    /**
+     * Get the scraped.
+     *
+     * @return 
+     */
+    public function scraped()
+    {
+        return $this->hasOne('App\Entities\Scraped');
+    }
+    
 }
