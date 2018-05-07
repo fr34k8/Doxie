@@ -5,8 +5,9 @@ namespace App\Services;
 use App\Entities\Pages;
 use App\Entities\Person;
 use App\Entities\Scraped;
+use App\Services\Contracts\iMetricsService;
 
-class MetricsService
+class MetricsService implements iMetricsService
 {
     /**
      * Pages model
