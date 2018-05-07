@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="ks-crm-contact-user-location">
                                             {!! __('<b>Current City</b> :city', [
-                                                'city' => e($person->location[0])
+                                                'city' => e($person->city)
                                             ]) !!}
                                         </div>
                                     </section>
