@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/pages/api/personal-access-token.js": "/js/pages/api/personal-access-token.js",
+    "/js/pages/api/clients.js": "/js/pages/api/clients.js",
+    "/js/pages/api/authorized-clients.js": "/js/pages/api/authorized-clients.js"
 }

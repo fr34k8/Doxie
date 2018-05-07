@@ -5,19 +5,16 @@
     <head>
         <meta charset="UTF-8">
         <title>{{ config('app.name') }}</title>
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url('css/libs/bootstrap.min.css')  }}">
         <link rel="stylesheet" type="text/css" href="{{ url('fonts/line-awesome/css/line-awesome.min.css') }}">
-        <!--<link rel="stylesheet" type="text/css" href="assets/fonts/open-sans/styles.css">-->
         <link rel="stylesheet" type="text/css" href="{{ url('fonts/montserrat/css/styles.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/libs/tether/tether.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="libs/jscrollpane/jquery.jscrollpane.css">
-        <link rel="stylesheet" type="text/css" href="libs/flag-icon-css/css/flag-icon.min.css">
         <link rel="stylesheet" type="text/css" href="{{ url('css/common.min.css') }}">        
         <link rel="stylesheet" type="text/css" href="{{ url('css/primary.min.css') }}">        
-        <link class="ks-sidebar-dark-style" rel="stylesheet" type="text/css" href="assets/styles/themes/sidebar-black.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/custom.css') }}">        
         @stack('styles')
     </head>
 
@@ -98,6 +95,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Preview">
                                 @auth
+                                    <a class="dropdown-item" href="{{ route('api.index') }}">
+                                        <span class="la la-user ks-icon"></span>
+                                        <span>{{ __('API') }}</span>
+                                    </a>
                                     <a class="dropdown-item" href="#">
                                         <span class="la la-user ks-icon"></span>
                                         <span>{{ __('Logout') }}</span>
@@ -155,5 +156,7 @@
 
     </body>
 
+    <script src="{{ url('js/app.js') }}"></script>
     <script src="{{ url('js/libs/jquery.min.js') }}"></script>
     <script src="{{ url('js/libs/bootstrap.min.js') }}"></script>
+    @stack('scripts')

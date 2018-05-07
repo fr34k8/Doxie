@@ -16,4 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .copyDirectory('resources/assets/fonts', 'public/fonts')
    .copyDirectory('resources/assets/css', 'public/css')
    .copyDirectory('resources/assets/js/libs', 'public/js/libs')
-   .copyDirectory('resources/assets/images', 'public/images');
+   .copyDirectory('resources/assets/images', 'public/images')
+   .js('resources/assets/js/pages/api/personal-access-token.js', 'public/js/pages/api')
+   .js('resources/assets/js/pages/api/clients.js', 'public/js/pages/api')
+   .js('resources/assets/js/pages/api/authorized-clients.js', 'public/js/pages/api');

@@ -1,0 +1,39 @@
+.red-check-header {
+    background-image: repeating-linear-gradient( 135deg, #dc3c35, #dc3c35 24px, #c42b26 24px, #c42b26 48px)
+}
+
+.blue-check-header {
+    background-image: repeating-linear-gradient( 135deg, rgb(75, 199, 240), rgb(75, 199, 240) 24px, rgb(84, 204, 242) 24px, rgb(84, 204, 242) 48px);
+}
+
+.modal-header {
+    min-height: 16.43px;
+    padding: 30px;
+    border-bottom: 0px solid #e5e5e5;
+}
+
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+    font-weight: 400;
+    color: #3c3c3c;
+}
+
+.modal-footer {
+    padding: 30px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f8fa;
+}
+
+.modal-header .close {
+    margin-top: -2px;
+}
+
+button.close {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+}
