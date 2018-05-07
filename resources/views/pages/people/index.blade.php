@@ -66,8 +66,10 @@
                                     @forelse($people as $person)
                                         <tr>
                                             <td>
-                                                <img src="" class="ks-avatar" alt="" width="36" height="36"> 
-                                                {{ $person->name }}
+                                                <img src="{{ $person->profilepicture }}" class="ks-avatar" alt="" width="36" height="36"> 
+                                                <a href="{{ route('people.show', $person->id) }}">
+                                                    {{ $person->name }}
+                                                </a>
                                             </td>
                                             <td>
                                                 @forelse($person->location as $location)

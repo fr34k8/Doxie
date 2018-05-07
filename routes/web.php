@@ -13,3 +13,7 @@
 
 Route::resource('people', 'PersonController');
 Route::resource('scraped', 'ScrapedController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

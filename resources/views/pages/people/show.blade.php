@@ -97,7 +97,7 @@
                                                 @endforelse
                                             </ul>
                                         </div>
-                                        <div class="tab-pane" id="crm-tab-events" role="tabpanel" aria-expanded="false" data-height="735" style="height: 775px;">
+                                        <div class="tab-pane" id="work" role="tabpanel" aria-expanded="false" data-height="735" style="height: 775px;">
                                             <ul class="list-group">                                                
                                                 @forelse($person->work as $work)
                                                     <li class="list-group-item">

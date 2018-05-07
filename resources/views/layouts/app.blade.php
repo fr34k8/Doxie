@@ -33,54 +33,7 @@
                 <!-- END RESPONSIVE SIDEBAR TOGGLER -->
 
                 <div class="ks-navbar-logo">
-                    <a href="index.html" class="ks-logo">{{ config('app.name') }}</a>
-
-                    <!-- BEGIN GRID NAVIGATION -->
-                    <!--<span class="nav-item dropdown ks-dropdown-grid">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                        <div class="dropdown-menu ks-info ks-scrollable" aria-labelledby="Preview" data-height="260">
-                            <div class="ks-scroll-wrapper">
-                                <a href="{{ url('/') }}" class="ks-grid-item">
-                                    <span class="ks-icon la la-dashboard"></span>
-                                    <span class="ks-text">Dashboard</span>
-                                </a>
-                            </div>
-                        </div>
-                    </span>-->
-
-                    <span class="nav-item dropdown ks-dropdown-grid-images">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                        <div class="dropdown-menu ks-info ks-scrollable" aria-labelledby="Preview" data-height="260">
-                            <div class="ks-scroll-wrapper">
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/dashboard.png">
-                                    <span class="ks-text">Dashboard</span>
-                                </a>
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/flask.png">
-                                    <span class="ks-text">Projects</span>
-                                </a>
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/calendar.png">
-                                    <span class="ks-text">Calendar</span>
-                                </a>
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/profile.png">
-                                    <span class="ks-text">Profile</span>
-                                </a>
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/ticket.png">
-                                    <span class="ks-text">Tickets</span>
-                                </a>
-                                <a href="#" class="ks-grid-item">
-                                    <img class="ks-icon" src="assets/img/menu-grid/settings.png">
-                                    <span class="ks-text">Settings</span>
-                                </a>
-                            </div>
-                        </div>
-                    </span>
-
-                    <!-- END GRID NAVIGATION -->
+                    <a href="{{ url('/') }}" class="ks-logo">{{ config('app.name') }}</a>
                 </div>
             </div>
 
@@ -104,7 +57,9 @@
                                 </a>
                             </div> --}}
                         </form>
-                        <a class="nav-item nav-link" href="#">Dashboard</a>
+                        <a class="nav-item nav-link" href="{{ route('people.index') }}">
+                            {{ __('Dashboard') }}
+                        </a>
                     </div>
                     <!-- END NAVBAR MENU -->
 
@@ -124,6 +79,42 @@
                             </a>
                         </div>
                         <!-- END NAVBAR ACTION BUTTON -->
+                        <div class="nav-item dropdown ks-user">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="ks-avatar">
+                                    <img src="{{ url('images/profile-image.jpg') }}" width="36" height="36">
+                                </span>
+                                <span class="ks-info">
+                                    @auth
+                                        <span class="ks-name">
+                                            {{ auth::user()->name }}
+                                        </span>
+                                    @else
+                                        <span class="ks-name">
+                                            {{ __('Guest') }}
+                                        </span>
+                                    @endauth
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Preview">
+                                @auth
+                                    <a class="dropdown-item" href="#">
+                                        <span class="la la-user ks-icon"></span>
+                                        <span>{{ __('Logout') }}</span>
+                                    </a>
+                                @else
+                                    <a class="dropdown-item" href="{{ route('login') }}">
+                                        <span class="la la-user ks-icon"></span>
+                                        <span>{{ __('Sign in') }}</span>
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">
+                                        <span class="la la-user ks-icon"></span>
+                                        <span>{{ __('Sign up') }}</span>
+                                    </a>
+                                @endauth
+
+                            </div>
+                        </div>
                     </div>
                     <!-- END NAVBAR ACTIONS -->
                 </nav>
@@ -163,3 +154,6 @@
         </div>
 
     </body>
+
+    <script src="{{ url('js/libs/jquery.min.js') }}"></script>
+    <script src="{{ url('js/libs/bootstrap.min.js') }}"></script>
