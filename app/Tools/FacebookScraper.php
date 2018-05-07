@@ -3,8 +3,9 @@
 namespace App\Tools;
 
 use Goutte\Client;
+use App\Tools\Contracts\iFacebookScraper;
 
-class FacebookScraper
+class FacebookScraper implements iFacebookScraper
 {
     /**
      * Cralwer instance 
