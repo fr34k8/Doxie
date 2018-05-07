@@ -1,5 +1,5 @@
 <img src="https://i.imgur.com/SxHqChC.png">
-<img src="https://i.imgur.com/niunm9L.png">
+<img src="https://i.imgur.com/we5psYQ.png">
 
 ## Doxie
 
