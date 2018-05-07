@@ -1,6 +1,6 @@
-<img src="https://i.imgur.com/SxHqChC.png" width="300">
-<img src="https://i.imgur.com/we5psYQ.png" width="300">
-<img src="https://i.imgur.com/0LL9zxL.png" width="300">
+<img src="https://i.imgur.com/SxHqChC.png">
+<img src="https://i.imgur.com/we5psYQ.png">
+<img src="https://i.imgur.com/0LL9zxL.png">
 
 ## Doxie
 
