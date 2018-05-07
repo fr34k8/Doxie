@@ -3,9 +3,12 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Entities\Attributes\PersonAttributes;
 
 class Person extends Model
 {
+    use PersonAttributes;
+
     /**
      * The table associated with the model.
      *
@@ -37,11 +40,20 @@ class Person extends Model
     /**
      * Get the scraped.
      *
-     * @return 
+     * @return Scraped
      */
     public function scraped()
     {
-        return $this->hasOne('App\Entities\Scraped');
+        return $this->morphOne('App\Entities\Scraped', 'owner');
     }
     
+    /**
+     * Get the user's liked pages
+     *
+     * @return Pages
+     */
+    public function pages() 
+    {
+        return $this->belongsToMany('App\Entities\Pages')->withTimeStamps();
+    }
 }

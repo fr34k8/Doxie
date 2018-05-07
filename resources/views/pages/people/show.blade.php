@@ -17,7 +17,7 @@
                             <div class="card ks-crm-contact-user-column">
                                 <div class="ks-crm-contact-user-column-main-info">
                                     <section>
-                                        <img src="assets/img/avatars/avatar-4.jpg" width="100" height="100" class="ks-crm-contact-user-avatar rounded-circle">
+                                        <img src="{{ $person->profilepicture }}" width="100" height="100" class="ks-crm-contact-user-avatar rounded-circle">
                                     </section>
                                     <section>
                                         <div class="ks-crm-contact-user-name">
@@ -54,9 +54,15 @@
                                     </div>
                                 </div>
                                 <div class="ks-crm-contact-user-column-custom-info">
-                                    <h6 class="ks-custom-info-header">Tags</h6>
+                                    <h6 class="ks-custom-info-header">
+                                        {{ __('Pages') }}
+                                    </h6>
                                     <div class="ks-custom-info-item">
-                                        <span class="badge badge-default-outline">Tag 1</span>
+                                        @foreach($person->pages as $page)
+                                            <span class="badge badge-default-outline">
+                                                {{ $page->name }}
+                                            </span>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

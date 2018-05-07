@@ -29,7 +29,10 @@ class FacebookScraper
         'work'         => '#pagelet_eduwork > div > div:nth-child(1) > ul > li',
         'education'    => '#pagelet_eduwork > div > div:nth-child(2) > ul > li',
         'location'     => '#pagelet_hometown > div > div > ul > li',
-        'images'       => '._xcx > div > img'
+        'images'       => '._xcx > div > img',
+        'about'        => '#pagelet_bio > div > ul > li > div > div > span',
+        'qoutes'       => '#pagelet_quotes > div > ul > li > div > div > span',
+        'likes'        => '#u_0_h > span > a'
     ];
 
     /**
@@ -142,6 +145,23 @@ class FacebookScraper
         
         return $this->page->filter($this->selectors['images'])->each(function ($node) {
             return $node->attr('src');
+        });
+    }
+
+    /**
+     * Get profile likes
+     *
+     * @return void
+     */
+    public function getLikes()
+    {
+        dump('scraping likes');
+        
+        return $this->page->filter($this->selectors['likes'])->each(function ($node) {
+            return [
+                'uri'  => $node->attr('href'),
+                'name' => $node->text(),
+            ];
         });
     }
 }

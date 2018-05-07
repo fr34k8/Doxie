@@ -36,4 +36,5 @@ class Scraped extends Model
         return $this->belongsTo('App\Entities\Person');
     }
     
+    
 }

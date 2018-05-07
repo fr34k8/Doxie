@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScrapedTable extends Migration
+class CreatePagesPersonTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateScrapedTable extends Migration
      */
     public function up()
     {
-        Schema::create('scraped', function (Blueprint $table) {
+        Schema::create('pages_person', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('uri');
-            $table->integer('owner_id')->nullable();
-            $table->string('owner_type')->nullable();
+            $table->integer('pages_id');
+            $table->integer('person_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreateScrapedTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scraped');
+        //
     }
 }

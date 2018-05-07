@@ -7,6 +7,7 @@ use App\Entities\Scraped;
 use App\Tools\FacebookScraper;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use App\Entities\Pages;
 
 class ScrapeFacebookCommand extends Command
 {
@@ -46,17 +47,34 @@ class ScrapeFacebookCommand extends Command
     protected $scraper;
 
     /**
+     * Return the model
+     *
+     * @var Pages
+     */
+    protected $pages;
+
+    /**
+     * Profile uri
+     *
+     * @var [type]
+     */
+    protected $uri;
+
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(FacebookScraper $scraper, Person $person, Scraped $scraped)
+    public function __construct(FacebookScraper $scraper, Person $person, Scraped $scraped, Pages $pages)
     {
         $this->person = $person;  
 
         $this->scraped = $scraped;  
 
         $this->scraper = $scraper;  
+
+        $this->pages = $pages;  
 
         parent::__construct();
     }
@@ -72,6 +90,78 @@ class ScrapeFacebookCommand extends Command
     }
 
     /**
+     * Scrape facebook profiles
+     *
+     * @param FacebookScraper $scraper
+     * @return void
+     */
+    public function scrapeFacebook()
+    {
+        for($i = 4; $i < 200; $i++){
+
+            // The profile uri
+            $this->uri = $this->scraper->profile_uri . $i;
+            
+            // Run when it's not been scraped
+            $this->notScraped(function(){
+
+                // Get the profile page
+                $profile = $this
+                    ->scraper
+                    ->getProfile($this->uri);
+
+                // Save the profile
+                if(!empty($this->profileInformation($profile)['name'])) {
+                   
+                    // Create a person
+                    $created = $this
+                        ->person
+                        ->create($this->profileInformation($profile));
+
+                    // create a page and add it to the scraped
+                    foreach($profile->getLikes() as $page) {
+                        
+                        $pageCreated = $this->pages->firstOrCreate([
+                            'name' => $page['name'],
+                            'uri'  => $page['uri']
+                        ]);
+
+                        // Assign the like to the profile....
+                        $pageCreated->likes()->save($created);
+
+                    }
+                          
+                    
+                   if($created){                        
+                        // Save the images
+                        // foreach($profile->getImages() as $key => $image){
+                        //     $contents = file_get_contents($image);
+                        //     Storage::put("profile/{$created->id}/{$key}.jpg", $contents);
+                        // }
+                        $created->scraped()->save(new $this->scraped(['uri' => $this->uri]));
+
+                    } else {
+                        $this->scraped(['uri' => $this->uri]);
+                    }
+                } 
+            });
+        }
+    }
+
+    /**
+     * Run when it's not been scraped
+     *
+     * @param callable $callable
+     * @return void
+     */
+    public function notScraped(callable $callable)
+    {
+        if($this->scraped->hasScraped($this->uri) && is_callable($callable)) {
+            call_user_func($callable);
+        }
+    }
+
+    /**
      * Return an array of information to store
      *
      * @return array
@@ -84,47 +174,5 @@ class ScrapeFacebookCommand extends Command
             'education' => $profile->getEducation(),
             'location'  => $profile->getLocation(),
         ];
-    }
-
-    /**
-     * Scrape facebook profiles
-     *
-     * @param FacebookScraper $scraper
-     * @return void
-     */
-    public function scrapeFacebook()
-    {
-        for($i = 4; $i < 200; $i++){
-
-            // The profile uri
-            $profile_uri = $this->scraper->profile_uri . $i;
-            
-            // Check if they have scraped this uri before
-            if($this->scraped->hasScraped($profile_uri)){
-            
-                // Get the profile page
-                $profile = $this->scraper->getProfile($profile_uri);
-
-                // Save the profile
-                if(!empty($this->profileInformation($profile)['name'])) {
-                   
-                    $created = $this->person->create($this->profileInformation($profile));
-                   
-                   if($created){
-                        // Save the images
-                        foreach($profile->getImages() as $key => $image){
-                            $contents = file_get_contents($image);
-                            Storage::put("profile/{$created->id}/{$key}.jpg", $contents);
-                        }
-
-                        $created->scraped()->save(new $this->scraped(['uri' => $profile_uri]));
-                    } else {
-                        $this->scraped(['uri' => $profile_uri]);
-                    }
-                }
-
-                // Save the scraped uri so we don't run it again
-            }
-        }
     }
 }
