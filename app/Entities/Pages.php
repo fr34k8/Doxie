@@ -26,11 +26,11 @@ class Pages extends Model
     /**
      * Get the scraped.
      *
-     * @return 
+     * @return Scraped
      */
     public function scraped()
     {
-        return $this->morphMany('App\Entities\Scraped', 'owner');
+        return $this->morphOne('App\Entities\Scraped', 'owner');
     }
 
     /**

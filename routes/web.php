@@ -12,8 +12,10 @@
 */
 
 Route::resource('people', 'PersonController');
+Route::resource('pages', 'PagesController');
 Route::resource('scraped', 'ScrapedController');
-Route::resource('api', 'ApiController');
+Route::resource('api', 'ApiController', ['only' => 'index']);
+Route::resource('dashboard', 'DashboardController', ['only' => 'index']);
 
 
 Auth::routes();

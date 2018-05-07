@@ -57,54 +57,13 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('Name') }}</th>
-                                        <th>{{ __('Location') }}</th>
-                                        <th>{{ __('Work') }}</th>
-                                        <th>{{ __('Education') }}</th>
+                                        <th>{{ __('URI') }}</th>
+                                        <th>{{ __('Date') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($people as $person)
-                                        <tr>
-                                            <td>
-                                                <img src="{{ $person->profilepicture }}" class="ks-avatar" alt="" width="36" height="36"> 
-                                                <a href="{{ route('people.show', $person->id) }}">
-                                                    {{ $person->name }}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @forelse($person->location as $location)
-                                                    <span class="badge badge-info-outline ks-sm">
-                                                        {{ $location }}
-                                                    </span><br>
-                                                @empty
-                                                    <div class="badge badge-info-outline ks-sm">
-                                                        {{ __('No information to show') }}
-                                                    </div>
-                                                @endforelse
-                                            </td>
-                                            <td>
-                                                @forelse($person->work as $work)
-                                                    <span class="badge badge-info-outline ks-sm">
-                                                        {{ $work }}
-                                                    </span><br>
-                                                @empty
-                                                    <div class="badge badge-info-outline ks-sm">
-                                                        {{ __('No information to show') }}
-                                                    </div>
-                                                @endforelse
-                                            </td>
-                                            <td>
-                                                @forelse($person->education as $education)
-                                                    <span class="badge badge-info-outline ks-sm">
-                                                        {{ $education }}
-                                                    </span> <br>
-                                                @empty
-                                                    <div class="badge badge-info-outline ks-sm">
-                                                        {{ __('No information to show') }}
-                                                    </div>
-                                                @endforelse
-                                            </td>
-                                        </tr>
+                                        @include('pages.people.tables.person')
                                     @empty
                                         <tr>
                                             <td class="alert alert-info" colspan="4">

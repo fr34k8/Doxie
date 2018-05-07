@@ -54,8 +54,11 @@
                                 </a>
                             </div> --}}
                         </form>
-                        <a class="nav-item nav-link" href="{{ route('people.index') }}">
+                        <a class="nav-item nav-link" href="{{ route('dashboard.index') }}">
                             {{ __('Dashboard') }}
+                        </a>
+                        <a class="nav-item nav-link" href="{{ route('people.index') }}">
+                            {{ __('People') }}
                         </a>
                     </div>
                     <!-- END NAVBAR MENU -->
@@ -144,7 +147,14 @@
             <ul class="nav nav-pills">
                 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/') }}">Dashboard</a>
+                    <a class="nav-link active" href="{{ route('dashboard.index') }}">
+                        {{ __('Dashboard') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('people.index') }}">
+                        {{ __('People') }}
+                    </a>
                 </li>
 
             </ul>

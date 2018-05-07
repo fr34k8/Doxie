@@ -129,6 +129,8 @@ class ScrapeFacebookCommand extends Command
                         // Assign the like to the profile....
                         $pageCreated->likes()->save($created);
 
+                        $pageCreated->scraped()->save(new $this->scraped(['uri' => $page['uri']]));
+
                     }
                           
                     
