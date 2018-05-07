@@ -2,7 +2,7 @@
         @component('partials.panels.panel-flat')
         
         @slot('actions')
-            <a class="btn btn-info btn-sm" @click="showCreateTokenForm">
+            <a class="btn btn-outline-primary btn-sm" @click="showCreateTokenForm">
                 Create New Token
             </a>
         @endslot
@@ -36,7 +36,7 @@
 
                         <!-- Delete Button -->
                         <td style="vertical-align: middle;" width="100px">
-                            <a class="btn btn-sm btn-danger white" @click="revoke(token)">
+                            <a class="btn btn-outline-danger btn-sm" @click="revoke(token)">
                                 Delete
                             </a>
                         </td>

@@ -2,7 +2,7 @@
         @component('partials.panels.panel-flat')
         
         @slot('actions')
-            <a class="btn btn-info btn-sm" @click="showCreateClientForm">
+            <a class="btn btn-outline-primary btn-sm" @click="showCreateClientForm">
                 Create New Client
             </a>
         @endslot
@@ -44,11 +44,11 @@
                         </td>
 
                         <!-- Edit/Delete Button -->
-                        <td style="vertical-align: middle;" width="160px">
-                             <a class="btn btn-sm btn-info white" @click="edit(client)">
+                        <td style="vertical-align: middle;" width="180px">
+                             <a class="btn btn-outline-success btn-sm" @click="edit(client)">
                                 Edit
                             </a>
-                            <a class="btn btn-sm btn-danger white" @click="destroy(client)">
+                            <a class="btn btn-outline-danger btn-sm" @click="destroy(client)">
                                 Delete
                             </a>
                         </td>
@@ -99,7 +99,7 @@
                             @keyup.enter="store" v-model="createForm.redirect">
 
                         <span class="help-block">
-                            Your application's authorization callback URL.
+                        Your application's authorization callback URL.
                         </span>
                     </div>
                 </form>
